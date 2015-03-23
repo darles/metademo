@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+
+    /**
+     * @return \Doctrine\ORM\Query
+     */
+    public function searchQuery()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('C');
+        $qb->from('AcmeDemoBundle:Category', 'C');
+
+        return $qb->getQuery();
+    }
+
 }

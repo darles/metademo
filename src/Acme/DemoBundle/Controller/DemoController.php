@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\DemoBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class DemoController extends Controller
 {
@@ -122,11 +123,32 @@ class DemoController extends Controller
     }
 
     /**
+     * @Route("/pagination", name="_demo_pagination")
+     * @Template()
+     */
+    public function paginationAction(Request $request)
+    {
+        $page = (int)$request->query->get('page', 1);
+        $service = $this->getCategoryService();
+        $entities = $service->getPaginatedResults($page, 5);
+
+        return $this->render('@AcmeDemo/Demo/pagination.html.twig', ['entities' => $entities]);
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     private function getEntityManager()
     {
         return $this->container->get('doctrine.orm.entity_manager');
+    }
+
+    /**
+     * @return \Acme\DemoBundle\Service\CategoryService
+     */
+    private function getCategoryService()
+    {
+        return $this->container->get('acme_demo.service.category');
     }
 
 }

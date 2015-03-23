@@ -1,0 +1,15 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - Demos" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <ul>
+    {% for entity in entities %}
+        <li>{{ entity.title }}</li>
+    {% endfor %}
+    </ul>
+
+    {{ knp_pagination_render(entities) }}
+{% endblock %}
