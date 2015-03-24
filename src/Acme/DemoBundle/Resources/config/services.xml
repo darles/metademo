@@ -41,5 +41,15 @@
         <service id="demo_doctrine_listener" class="Acme\DemoBundle\EventListener\DoctrineListener">
             <tag name="doctrine.event_subscriber"/>
         </service>
+
+        <!-- FORMS -->
+        <service id="acme_demo.form.user_to_code_transformer" class="Acme\DemoBundle\Form\UserToCodeTransformer">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="acme_demo.form.user_code_type" class="Acme\DemoBundle\Form\UserCodeType">
+            <argument type="service" id="acme_demo.form.user_to_code_transformer"/>
+            <tag name="form.type" alias="user_code_selector" />
+        </service>
     </services>
 </container>

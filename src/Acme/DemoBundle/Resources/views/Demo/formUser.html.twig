@@ -1,0 +1,15 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - User form" %}
+
+{% block content_header '' %}
+
+{% block content %}
+    <form action="{{ path('_demo_form_user', {'id': id}) }}" method="POST">
+        {{ form_errors(form) }}
+
+        {{ form_widget(form) }}
+
+        <input type="submit" value="Submit" class="symfony-button-grey" />
+    </form>
+{% endblock %}

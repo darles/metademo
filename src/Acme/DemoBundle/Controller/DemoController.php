@@ -3,6 +3,9 @@
 namespace Acme\DemoBundle\Controller;
 
 use Acme\DemoBundle\Entity\Post;
+use Acme\DemoBundle\Entity\User;
+use Acme\DemoBundle\Form\PostType;
+use Acme\DemoBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\DemoBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -133,6 +136,56 @@ class DemoController extends Controller
         $entities = $service->getPaginatedResults($page, 5);
 
         return $this->render('@AcmeDemo/Demo/pagination.html.twig', ['entities' => $entities]);
+    }
+
+    /**
+     * @Route("/form/user/{id}", name="_demo_form_user", defaults={"id" = 0})
+     * @Template()
+     */
+    public function formUserAction(Request $request, $id)
+    {
+        $em = $this->getEntityManager();
+        $entity = $em->getRepository('AcmeDemoBundle:User')->find($id);
+        if ($entity === null) {
+            $entity = new User();
+        }
+        $form = $this->createForm(new UserType(), $entity);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+            dump($entity);
+            exit();
+        }
+        return array(
+            'form' => $form->createView(),
+            'id' => $entity->getId()
+        );
+    }
+
+    /**
+     * @Route("/form/post/{id}", name="_demo_form_post", defaults={"id" = 0})
+     * @Template()
+     */
+    public function formPostAction(Request $request, $id)
+    {
+        $em = $this->getEntityManager();
+        $entity = $em->getRepository('AcmeDemoBundle:Post')->find($id);
+        if ($entity === null) {
+            $entity = new Post();
+        }
+        $form = $this->createForm(new PostType(), $entity);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+            dump($entity);
+            exit();
+        }
+        return array(
+            'form' => $form->createView(),
+            'id' => $entity->getId()
+        );
     }
 
     /**

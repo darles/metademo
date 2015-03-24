@@ -2,6 +2,9 @@
 
 namespace Acme\DemoBundle\Entity;
 
+use Acme\DemoBundle\Entity\Category;
+use Acme\DemoBundle\Entity\User;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
@@ -43,6 +46,16 @@ class Post
      * })
      */
     private $category;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * })
+     */
+    private $user;
 
     /**
      * @var string
@@ -89,7 +102,7 @@ class Post
      * Set category
      *
      * @param \stdClass $category
-     * @return Post
+     * @return Category
      */
     public function setCategory($category)
     {
@@ -106,6 +119,29 @@ class Post
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \stdClass $user
+     * @return User
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \stdClass
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
