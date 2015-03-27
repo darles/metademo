@@ -4,6 +4,8 @@ namespace Acme\DemoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
@@ -12,8 +14,15 @@ class UserType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('email', 'email')
-            ->add('code', 'text');
+            ->add('email', 'email');
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $user = $event->getData();
+            $form = $event->getForm();
+            if (!$user || null === $user->getId()) {
+                $form->add('code', 'text');
+            }
+        });
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
