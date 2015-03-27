@@ -62,9 +62,9 @@ class Category
         return $this->title;
     }
 
-    public function __toString()
+    public function getSelectTitle()
     {
-        return $this->getTitle();
+        return $this->getId() . ': ' . $this->getTitle();
     }
 
 

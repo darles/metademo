@@ -179,7 +179,6 @@ class DemoController extends Controller
         if ($form->isValid()) {
             $em->persist($entity);
             $em->flush();
-            dump($entity);
             exit();
         }
         return array(

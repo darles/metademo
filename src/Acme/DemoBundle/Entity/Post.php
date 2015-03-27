@@ -38,6 +38,20 @@ class Post
     private $title;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time", type="datetime", nullable=true)
+     */
+    protected $time;
+
+    /**
+     * @var Float
+     *
+     * @ORM\Column(name="price", type="float", nullable=true)
+     */
+    protected $price;
+
+    /**
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\Category")
@@ -189,5 +203,51 @@ class Post
     public function doStuffOnPreUpdate()
     {
         $this->title = 'Atnaujinimo title';
+    }
+
+    /**
+     * Set time
+     *
+     * @param \DateTime $time
+     * @return Post
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     *
+     * @return \DateTime
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     * @return Post
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }
