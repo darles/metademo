@@ -64,7 +64,7 @@ class Post
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user", referencedColumnName="id")
      * })

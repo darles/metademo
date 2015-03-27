@@ -23,6 +23,7 @@ class PostType extends AbstractType
             ->add('price', 'money', array('grouping' => NumberFormatter::GROUPING_USED))
             ->add('content', 'textarea');
         $builder->add('user', 'user_code_selector');
+        //$builder->add('user', new UserType());
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             dump('PRE_SET_DATA');
