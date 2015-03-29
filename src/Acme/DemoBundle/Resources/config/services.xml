@@ -51,5 +51,11 @@
             <argument type="service" id="acme_demo.form.user_to_code_transformer"/>
             <tag name="form.type" alias="user_code_selector" />
         </service>
+
+        <service id="acme_demo.unique_code_validator" class="Acme\DemoBundle\Validator\Constraints\UniqueCodeValidator">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="validator.constraint_validator" alias="acme_demo_unique_code" />
+        </service>
+
     </services>
 </container>

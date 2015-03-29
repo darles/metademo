@@ -4,10 +4,12 @@ namespace Acme\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Acme\DemoBundle\Validator\Constraints as AcmeDemoAssert;
 
 /**
  * User
  *
+ * @AcmeDemoAssert\UniqueCode(groups={"Edit"})
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
@@ -40,9 +42,19 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=255)
+     * @Assert\NotBlank(groups={"Edit"})
+     * @Assert\NotNull(groups={"Edit"})
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
      */
     private $code;
+
+    /**
+     * @var string
+     *
+     * @Assert\Date()
+     * @ORM\Column(name="birthday", type="date", length=255)
+     */
+    private $birthday;
 
 
     /**
@@ -122,5 +134,28 @@ class User
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param string $birthday
+     * @return User
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return string 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
     }
 }

@@ -1,5 +1,23 @@
 {% extends "AcmeDemoBundle::layout.html.twig" %}
 
+{% form_theme form _self %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form_row clear-fix">
+            <span style="float:left;font-weight: bold; padding:5px">{{ form_label(form) }}</span>
+            <div style="float:left">{{ form_widget(form) }}</div>
+            <div style="float:left;font-size:10px;color:red">{{ form_errors(form) }}</div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block birthday_label %}
+    {% spaceless %}
+        *{{ form_label(form) }}
+    {% endspaceless %}
+{% endblock %}
+
 {% block title "Symfony - User form" %}
 
 {% block content_header '' %}
@@ -7,7 +25,8 @@
 {% block content %}
         {{ form_start(form) }}
         {{ form_errors(form) }}
-        {{ form_widget(form) }}
+        {{ form_row(form.birthday) }}
+        {{ form_rest(form) }}
         <input type="submit" value="Submit" class="symfony-button-grey" />
         {{ form_end(form) }}
 {% endblock %}

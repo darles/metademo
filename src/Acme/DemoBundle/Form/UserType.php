@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserType extends AbstractType
 {
@@ -14,12 +15,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('name', 'text')
+            ->add('birthday', 'birthday')
             ->add('email', 'email');
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $user = $event->getData();
             $form = $event->getForm();
-            if (!$user || null === $user->getId()) {
+            if ($user && $user->getId()) {
                 $form->add('code', 'text');
             }
         });
@@ -29,6 +31,14 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Acme\DemoBundle\Entity\User',
+            'validation_groups' => function(\Symfony\Component\Form\FormInterface $form) {
+                $user = $form->getData();
+                if ($user->getId()) {
+                    return array('Edit');
+                }
+
+                return array('User');
+            },
         ));
     }
 
