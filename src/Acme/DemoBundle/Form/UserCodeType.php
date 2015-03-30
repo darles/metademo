@@ -20,13 +20,6 @@ class UserCodeType  extends AbstractType
         $builder->addModelTransformer($this->userToCodeTransformer);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'class' => 'Acme\DemoBundle\Entity\User',
-        ));
-    }
-
     public function getParent()
     {
         return 'text';
