@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\EqualTo;
 
 class UserType extends AbstractType
 {

@@ -16,8 +16,8 @@ msgstr "Test"
 msgid "ito_test_string_with_params"
 msgstr "Test %param%"
 
-msgid "ito_test_string_one"
-msgstr "Print One Item"
+msgid "ito_test_string_one|ito_test_string_two"
+msgstr "Print One Item|Print %count% items"
 
-msgid "ito_test_string_two"
-msgstr "Print %count% items"
+msgid "ito_test_string_raw"
+msgstr "Test <strong>RAW</strong>"

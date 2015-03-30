@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\EqualTo;
 
 class PostType extends AbstractType
 {
@@ -16,9 +17,9 @@ class PostType extends AbstractType
         $builder
             ->add('category', 'entity', array(
                 'class' => 'AcmeDemoBundle:Category',
-                'property' => 'selectTitle',
+                'property' => 'selectTitle'
             ))
-            ->add('title', 'text')
+            ->add('title', 'text', array('constraints' => new EqualTo(['value' => 'test', 'message' => 'custom_message'])))
             ->add('time', 'date')
             ->add('price', 'money', array('grouping' => NumberFormatter::GROUPING_USED))
             ->add('content', 'textarea');

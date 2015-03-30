@@ -3,7 +3,13 @@
 {% block title "Symfony - Contact form" %}
 
 {% block content %}
-    {{ 'ito_test_string'|trans }}<br/>
-    {{ 'ito_test_string_with_params'|trans({'%param%': 'param'}) }}<br/>
-    {{ 'ito_test_string_one|ito_test_string_two'|transchoice(2, {'%count%': 2}) }}<br/>
+    {{ 'ito_test_string'|trans }}<br/><br/>
+    {{ 'ito_test_string_with_params'|trans({'%param%': 'param'}) }}<br/><br/>
+    {{ 'ito_test_string_one|ito_test_string_two'|transchoice(1, {'%count%': 1}) }}<br/>
+    {{ 'ito_test_string_one|ito_test_string_two'|transchoice(2, {'%count%': 2}) }}<br/><br/>
+    {{ 'ito_test_string_raw'|trans|raw }}<br/><br/>
+    {{ 'ito_test_string'|trans({}, 'messages') }}<br/>
+    {{ 'ito_test_string'|trans({}, 'clients') }}<br/><br/>
+    {{ 'ito_test_string'|trans({}, 'messages', 'lt') }}<br/>
+    {{ 'ito_test_string'|trans({}, 'messages', 'en') }}<br/>
 {% endblock %}
