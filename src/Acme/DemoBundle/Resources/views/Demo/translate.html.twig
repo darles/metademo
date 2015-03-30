@@ -1,0 +1,9 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - Contact form" %}
+
+{% block content %}
+    {{ 'ito_test_string'|trans }}<br/>
+    {{ 'ito_test_string_with_params'|trans({'%param%': 'param'}) }}<br/>
+    {{ 'ito_test_string_one|ito_test_string_two'|transchoice(2, {'%count%': 2}) }}<br/>
+{% endblock %}

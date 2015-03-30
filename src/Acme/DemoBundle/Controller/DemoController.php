@@ -188,6 +188,15 @@ class DemoController extends Controller
     }
 
     /**
+     * @Route("/translate", name="_demo_translate")
+     * @Template()
+     */
+    public function translateAction()
+    {
+        return [];
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     private function getEntityManager()
