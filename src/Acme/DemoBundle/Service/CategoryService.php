@@ -39,7 +39,8 @@ class CategoryService
      */
     public function __construct(
         EntityManager $em,
-        Paginator $paginator
+        Paginator $paginator,
+        $argument
     ) {
         $this->em = $em;
         $this->paginator = $paginator;
@@ -69,6 +70,14 @@ class CategoryService
     {
         $query = $this->repo->searchQuery();
         return $this->paginator->paginate($query, $page, $itemsPerPage);
+    }
+
+    /**
+     * @param $argument
+     */
+    public function testCall($argument)
+    {
+
     }
 
 }
